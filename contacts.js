@@ -15,7 +15,9 @@ async function listContacts() {
 async function getContactById(contactId) {
   try {
     const contacts = await listContacts();
-    return contacts.find(contact => contact.id === contactId) || null;
+    const idToFind = contactId.toString(); // Преобразуем в строку
+    const contact = contacts.find(contact => contact.id === idToFind) || null;
+    return contact;
   } catch (error) {
     throw error;
   }
@@ -24,7 +26,8 @@ async function getContactById(contactId) {
 async function removeContact(contactId) {
   try {
     const contacts = await listContacts();
-    const index = contacts.findIndex(contact => contact.id === contactId);
+    const idToFind = contactId.toString(); // Преобразуем в строку
+    const index = contacts.findIndex(contact => contact.id === idToFind);
     if (index === -1) {
       return null;
     }
